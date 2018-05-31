@@ -1,4 +1,4 @@
-package additionaltasks.task5;
+package additionaltasks.task5.utils;
 
 import java.util.ArrayList;
 
@@ -8,12 +8,15 @@ public class Lists {
         if (elements == null) {
             return null;
         }
+
         ArrayList<T> list = newArrayList();
         for (T e : elements) {
             list.add(e);
         }
         return list;
     }
+
     public static <T> ArrayList<T> newArrayList() {
         return new ArrayList<>();
-    }}
+    }
+}

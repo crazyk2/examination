@@ -11,58 +11,73 @@ public class Task3 {
     // идущие друг за другом буквы в одну и на выходе вернуть строку,
     // которая не будет иметь парных, идущих друг за другом букв.
     // Пример: aaabccddd => abd, baab => пусто
+    // Пример: aaabccddd => abd, baab => пусто
 
-    private static void solution1(String input) {
+    private static String solution1(String input) {
 
         char[] chars = input.toCharArray();
 
         boolean _continue = true;
 
-        while (_continue) {
+        while (_continue && chars.length > 1) {
             _continue = false;
             char[] tmpResult = new char[chars.length];
             int k = 0;
             for (int i = 0; i < chars.length; i++) {
-                tmpResult[k] = chars[i];
-                k++;
-                if (i == chars.length - 1) break;
+                if (i == chars.length - 1) {
+                    tmpResult[k] = chars[i];
+                    k++;
+                    break;
+                }
                 if (chars[i] == chars[i + 1]) {
                     _continue = true;
                     i++;
+                } else {
+                    tmpResult[k] = chars[i];
+                    k++;
                 }
 
             }
             chars = Arrays.copyOf(tmpResult, k);
 
         }
-        System.out.println(String.valueOf(chars));
+        return String.valueOf(chars);
     }
 
-    private static void solution2(String input) {
+    private static String solution2(String input) {
         Pattern pattern = Pattern.compile("([a-z])\\1");
         boolean _continue = true;
 
         while (_continue) {
             _continue = false;
             Matcher m = pattern.matcher(input);
-            while (m.find()) {
+            if (m.find()) {
                 _continue = true;
-                String replaceChar = m.group().substring(0, 1);
-                input = input.replaceFirst("("+replaceChar+")\\1", replaceChar);
+                input = input.replaceAll("([a-z])\\1", "");
             }
         }
-        System.out.println(input);
-
+        return input;
 
     }
 
-    public static void main(String[] args) {
-        solution1("aabbbcc");
-        solution1("aabbbbcccde");
-        solution1("aababbcccde");
 
-        solution2("aabbbcc");
-        solution2("aabbbbcccde");
-        solution2("aababbcccde");
+    public static void main(String[] args) {
+
+        System.out.println("----------------------");
+        System.out.println(solution1("a"));
+        System.out.println(solution1("aabbbcc"));
+        System.out.println(solution1("aabbbbcccde"));
+        System.out.println(solution1("aababbcccde"));
+        System.out.println(solution1("baab"));
+        System.out.println("----------------------");
+        System.out.println(solution2("a"));
+        System.out.println(solution2("aabbbcc"));
+        System.out.println(solution2("aabbbbcccde"));
+        System.out.println(solution2("aababbcccde"));
+        System.out.println(solution2("baab"));
+        System.out.println("----------------------");
+
+
+
     }
 }

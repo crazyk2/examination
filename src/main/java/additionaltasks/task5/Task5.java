@@ -3,8 +3,8 @@ package additionaltasks.task5;
 
 import java.util.*;
 
-import static additionaltasks.task5.Lists.newArrayList;
-import static additionaltasks.task5.Validations.assertNotNull;
+import static additionaltasks.task5.utils.Lists.newArrayList;
+import static additionaltasks.task5.utils.Validations.assertNotNull;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
@@ -72,7 +72,7 @@ public class Task5 {
             return false;
         }
         for (Object next : actual) {
-            if (areEqual(next, value)) {
+            if (Objects.equals(next, value)) {
                 return true;
             }
         }
@@ -86,23 +86,10 @@ public class Task5 {
         }
         Iterator<?> iterator = actual.iterator();
         while (iterator.hasNext()) {
-            if (areEqual(iterator.next(), value)) {
+            if (Objects.equals(iterator.next(), value)) {
                 iterator.remove();
                 return;
             }
         }
     }
-
-
-    public static boolean areEqual(Object o1, Object o2) {
-        if (o1 == null) {
-            return o2 == null;
-        }
-        if (o1.equals(o2)) {
-            return true;
-        }
-        return false;
-    }
-
-
 }
